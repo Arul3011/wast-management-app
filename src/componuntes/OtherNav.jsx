@@ -1,12 +1,9 @@
-"use client";
 import Link from "next/link";
-import React from "react";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { CgProfile } from "react-icons/cg";
-
-function Nav() {
-  const session = true
-    const dialogRef = useRef(null);
+function OtherNav() {
+    const session = true
+     const dialogRef = useRef(null);
 
      const openDialog = () => {
     dialogRef.current.showModal();
@@ -15,7 +12,7 @@ function Nav() {
   // Close the dialog
   const closeDialog = () => {
     dialogRef.current.close();
-  };
+    }
   return (
     <div className="flex w-[90%] h-[20px] px-0 my-[15px] mb-[20px]">
       <Link href='/' className="flex w-[50%]">
@@ -26,8 +23,8 @@ function Nav() {
         />
         <p className="mt-[15px]">RECYCLE RALLY</p>
       </Link>
-      <div className="flex justify-between w-[50%]">
-        <a className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
+      <div className="flex justify-end w-[50%]">
+        {/* <a className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
           Home
         </a>
         <a className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
@@ -38,8 +35,9 @@ function Nav() {
         </a>
         <a className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
           Contact
-        </a>
-        {session ? (
+        </a> */}
+
+          {!session ? (
         <>
           <button className="w-[100px] h-[35px] rounded-[5px] m-[0_10px] bg-[#189b2c] text-white border-none">
             Login
@@ -49,8 +47,9 @@ function Nav() {
           </button>
         </>
       ) : (
-       <span onClick={openDialog}> <CgProfile size={35}  /> </span>
+        <span onClick={openDialog}> <CgProfile size={35}  /> </span>
       )}
+      
       </div>
       <dialog   ref={dialogRef}   className="bg-white p-6 rounded-lg shadow-lg max-w-sm mx-auto z-50">
         test
@@ -62,4 +61,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default OtherNav;

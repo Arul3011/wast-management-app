@@ -1,11 +1,17 @@
+'use client';
 import Footer from "@/componuntes/Fotter";
 import Nav from "@/componuntes/Nav";
+import OtherNav from "@/componuntes/OtherNav";
+import  {useForm }  from "react-hook-form"
+import { CgProfile } from "react-icons/cg";
 
 
 const Sell = () => {
-  return (
+  const {register} =useForm()  
+
+return (
     <>
- <Nav />
+<OtherNav />
       <div className="sell-feild  flex justify-around h-[100vh] mt-[60px]">
         <div className="sell-text text-green-600 w-[50%]">
           <div className="main-text-sce text-center">
@@ -51,6 +57,7 @@ const Sell = () => {
             placeholder="Description"
             className="w-4/5 mx-auto block p-2 mb-4 text-lg rounded-md"
           ></textarea>
+        
           <button
             type="submit"
             className="w-1/2 mx-auto bg-white block text-green-600 py-2 rounded-full font-semibold text-lg"

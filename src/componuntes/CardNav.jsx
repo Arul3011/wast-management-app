@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 function Bsm() {
  
 
@@ -15,16 +15,15 @@ function Bsm() {
           <li>Filter by precise specifications to find suitable listings</li>
         </ul>
         <div className="flex justify-center p-[10px_0]">
-          <button
-            // onClick={handleBuyClick}
-            className="w-[100px] h-[33px] bg-white text-[#189b2c] font-semibold rounded-[7px] border-none cursor-pointer"
+         <Link href='/buy'
+  className="w-[110px] h-[35px]  bg-white text-[15px] flex justify-center items-center text-[#189b2c] font-semibold rounded-[7px] border-none cursor-pointer"
           >
             Buy Material
-          </button>
+          </Link>
         </div>
       </div>
 
-      {/* Sell Material Card */}
+     
       <div className="bg-[#189b2c] w-[400px] rounded-[20px] p-[15px]">
         <h2 className="text-white text-center mb-[15px]">Sell Material</h2>
         <ul className="text-white text-center mb-[10px] px-[20px] list-disc list-inside">
@@ -34,14 +33,15 @@ function Bsm() {
           <li>A carbon-efficient circular economy for your waste</li>
         </ul>
         <div className="flex justify-center p-[10px_0]">
-          <button
-            // onClick={handleSellClick}
-            className="w-[100px] h-[33px] bg-white text-[#189b2c] font-semibold rounded-[7px] border-none cursor-pointer"
+          <Link href='/sell'
+           
+            className="w-[110px] h-[35px] bg-white text-[15px] flex justify-center items-center text-[#189b2c] font-semibold rounded-[7px] border-none cursor-pointer"
           >
             Sell Material
-          </button>
+          </Link>
         </div>
       </div>
+      
     </div>
   );
 }
