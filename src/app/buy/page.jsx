@@ -9,21 +9,21 @@ import { GiWeight } from "react-icons/gi";
 function Buy() {
   const [items, setItems] = useState([]);
 
-//   useEffect(() => {
-//     const fetchPosts = async () => {
-//       try {
-//         const posts = await fetch("http://localhost:3000/api/posts");
-//         const jsonpost = await posts.json();
-//         if (jsonpost) {
-//           console.log(jsonpost);
-//           setItems(jsonpost.dbresponse);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching posts:", error);
-//       }
-//     };
-//     fetchPosts();
-//   }, []);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts = await fetch("/api/posts");
+        const jsonpost = await posts.json();
+        if (jsonpost) {
+          console.log(jsonpost);
+          setItems(jsonpost.dbresponse);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+    fetchPosts();
+  }, []);
 
   return (
     <div className="buy-home">
@@ -58,7 +58,9 @@ function Buy() {
                     <CiLocationOn className="text-xl" />
                     <span>{val.location}</span>
                   </p>
-                  <button className="bg-green-500 text-white px-8 py-3 rounded-md hover:bg-green-400 transition w-full mt-4">
+                  <button className="bg-green-500 text-white px-8 py-3 rounded-md hover:bg-green-400 transition w-full mt-4"
+                    onClick={()=> alert("OutofStock")}
+                  >
                     BUY
                   </button>
                 </div>
