@@ -1,17 +1,26 @@
 'use client';
 import Footer from "@/componuntes/Fotter";
 import OtherNav from "@/componuntes/OtherNav";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { useState } from "react";
 import  {useForm }  from "react-hook-form"
 import { CgProfile } from "react-icons/cg";
+import { storage } from "@/lib/firebase";
+import { useSession } from "next-auth/react";
 
 const Sell = () => {  
-
+  const { data: session, status } = useSession();
+  const userID = "session id"
   const [downloadURL, setDownloadURL] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  // if (session) {
+  //   console.log(session.user.email);
+  //   }
   const onSubmit = async (data) => {
     const file = data.file[0];
     if (file) {
@@ -41,7 +50,7 @@ const Sell = () => {
             location: data.location,
             quantity: data.quantity,
             imageUrl: downloadURL,
-            userID: userID,
+            userID: session.user.email,
           }),
         });
         if (dbres) {
@@ -62,7 +71,7 @@ return (
     <>
 <OtherNav />
       <div className="sell-feild  flex justify-around h-[100vh] mt-[60px]">
-        <div className="sell-text text-green-600 w-[50%]">
+        <div className="sell-text text-green-600 w-[50%] mt-[80px]">
           <div className="main-text-sce text-center">
             <h3 className="uppercase text-xl font-semibold mb-4">Get the best price for your bulk plastic</h3>
             <h1 className="text-4xl font-bold mb-4">Sell Your Plastic Material</h1>
@@ -81,7 +90,7 @@ return (
             type="text"
             name="type"
             placeholder="Material Type"
-            className="w-4/5 mx-auto block p-2 mb-4 text-lg rounded-md"
+            className="w-4/5 mx-auto block p-2 mb-4 text-sm text-black rounded-md"
             {...register("type", {
               required: {
                 value: true,
@@ -96,7 +105,7 @@ return (
             type="text"
             name="quantity"
             placeholder="Quantity (kg)"
-            className="w-4/5 mx-auto p-2 block mb-4 text-lg rounded-md"
+            className="w-4/5 mx-auto p-2 block mb-4 text-sm text-black rounded-md"
             {...register("quantity", {
               required: {
                 value: true,
@@ -112,7 +121,7 @@ return (
             type="text"
             name="location"
             placeholder="Location"
-            className="w-4/5 mx-auto block p-2 mb-4 text-lg rounded-md"
+            className="w-4/5 mx-auto block text-black p-2 mb-4 text-sm rounded-md"
             {...register("location", {
               required: {
                 value: true,
@@ -127,7 +136,7 @@ return (
             type="file"
             accept="image/*"
             name="file"
-            className="w-4/5 mx-auto block p-2 mb-4 bg-white text-lg rounded-md"
+             className="w-4/5 mx-auto block text-black p-2 mb-4 bg-[#fff] placeholder:text-gray-400 text-sm rounded-md"
             {...register("file", {
               required: {
                 value: true,
@@ -141,7 +150,7 @@ return (
           <textarea
             name="description"
             placeholder="Description"
-            className="w-4/5 mx-auto block p-2 mb-4 text-lg rounded-md"
+            className="w-4/5 mx-auto block p-2 mb-4 text-black text-sm rounded-md"
             {...register("description", {
               required: {
                 value: true,
@@ -153,10 +162,11 @@ return (
             <p className="text-red-500 text-sm p-0"> {errors.location.message}</p>
           )}
           <button
+               disabled={isSubmitting}
             type="submit"
-            className="w-1/2 mx-auto bg-white block text-green-600 py-2 rounded-full font-semibold text-lg"
+            className="w-1/2 mx-auto bg-white block  text-green-600 py-2 rounded-full font-semibold text-lg hover:bg-green-600 hover:text-[#fff] border-[2px] border-[#fff] transition-all duration-300 ease-in-out" 
           >
-            Submit
+        {isSubmitting ? "Loading.." : "Sign Up"}
           </button>
           {errors.root && <p className="text-red-500 text-sm p-0"> {errors.root.message}</p>}
         </form>

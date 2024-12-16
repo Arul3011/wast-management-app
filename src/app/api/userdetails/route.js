@@ -23,6 +23,5 @@ export async function POST(response) {
   if (dbrespinse) {
     if (dbrespinse.length === 0) return NextResponse.json({ response: false });
   }
- 
   return NextResponse.json({dbrespinse})
 }

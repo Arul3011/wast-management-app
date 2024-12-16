@@ -1,4 +1,4 @@
 
 export { default } from "next-auth/middleware"
 
-export const config = { matcher: [ "/sell"] }
+export const config = { matcher: [ "/sell","/porfile"] }

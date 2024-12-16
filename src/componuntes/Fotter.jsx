@@ -13,10 +13,10 @@ function Footer(props) {
 
       <div className="flex flex-col items-start space-y-3 mt-4 md:mt-0">
         <h2 className="text-xl text-green-700">Links</h2>
-        <div className="space-y-2">
-          <a href="" className="text-green-700 hover:underline">Home</a>
-          <a href="" className="text-green-700 hover:underline">About Us</a>
-          <a href="" className="text-green-700 hover:underline">Contact Us</a>
+        <div className="space-y-2 flex flex-col ">
+          <a href="#home" className="text-green-700 hover:underline">Home</a>
+          <a href="#about" className="text-green-700 hover:underline">About Us</a>
+          <a href="#contact" className="text-green-700 hover:underline">Contact Us</a>
         </div>
       </div>
     </footer>

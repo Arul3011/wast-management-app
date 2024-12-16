@@ -3,17 +3,16 @@ import OtherNav from "@/componuntes/OtherNav";
 import { useState, useEffect,  } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { GiWeight } from "react-icons/gi";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 function Profile() {
-
+  const { data: session, status } = useSession();
   const [postes, setPostes] = useState([]);
   const [userdetail, setUserdetail] = useState({
     "mobialNum":987213471,
     "name":"Arul",
     "email":"Admin@gmail.com"
   });
-
 //   useEffect(() => {
 //     const fetchPosts = async () => {
 //       try {
@@ -23,7 +22,7 @@ function Profile() {
 //             "Content-Type": "application/json",
 //           },
 //           body: JSON.stringify({
-//             userID: userID,
+//             email: session.user.email,
 //           }),
 //         });
 //         const jsonpost = await poste.json();
@@ -64,26 +63,14 @@ function Profile() {
 
   return (
     <>
-      {/* Navigation Bar */}
-      {/* <div className="w-full py-4 flex items-center justify-between bg-gray-800 text-white">
-        <div
-          className="flex items-center cursor-pointer"
-        >
-          <img
-            src="/pixelcut-export.jpeg"
-            alt="logo"
-            className="h-20"
-          />
-          <p className="text-xl font-semibold ml-2">RECYCLE RALLY</p>
-        </div>
-      </div> */}
+
       <OtherNav />
 
-      {/* Profile Card */}
+
       <div className="flex w-4/5 mx-auto border border-black rounded-lg mt-10 p-4">
         <div className="w-1/2 flex justify-center items-center">
           <img
-            src="https://media.licdn.com/dms/image/v2/D5603AQHEJxUmdL7HQw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718232043234?e=2147483647&v=beta&t=9lgpb5MRcc6v3rd845WGiphhxfv3X7jS4qSuclXMxT4"
+            src="/profile.png"
             alt="profile img"
             className="w-72 h-72 rounded-full border-4 border-gray-300"
           />

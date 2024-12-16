@@ -4,8 +4,11 @@ import Bsm from "@/componuntes/CardNav";
 import About from "@/componuntes/About";
 import Contact from "@/componuntes/Contact ";
 import Footer from "@/componuntes/Fotter";
+import { getServerSession } from "next-auth";
+import { options } from "./api/auth/[...nextauth]/options";
 
-export default function Home() {
+export default async function Home() {
+ const session = await getServerSession(options);
   return (
  <div>
   <Nav />
