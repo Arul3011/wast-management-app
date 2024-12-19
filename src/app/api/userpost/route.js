@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   return NextResponse.json({sts:true})
 }
-export async function POST(session) {
+export async function POST(response) {
     const fetchdata = await response;
     const fetdata = await fetchdata.json();
     const client = await clientPromise;
@@ -12,7 +12,7 @@ export async function POST(session) {
     if (fetdata) {
       var dbrespinse = await db
         .collection("posts")
-        .find({ email: fetdata.email })
+        .find({ userID: fetdata.email })  
         .toArray();
     }
   

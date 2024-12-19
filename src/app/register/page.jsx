@@ -1,9 +1,9 @@
 'use client';
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-
+import { useRouter } from 'next/navigation'
 function Signup() {
+  const router= useRouter();
   const {
     register,
     handleSubmit,
@@ -35,8 +35,8 @@ function Signup() {
       });
 
       const jres = await dbres.json();
-      if (jres.message === "addedd") {
-        redirect("/api/auth/signin");
+      if (jres.created) {
+        router.push('/signin');
       } else {
         setError("root", { type: "manual", message: jres.error || "Sign up failed" });
       }
@@ -57,7 +57,7 @@ function Signup() {
         onSubmit={handleSubmit(onSubmit)}
         className="w-96 flex flex-col p-6 shadow-lg rounded-lg bg-white"
       >
-        <img src="/pixelcut-export.jpeg" alt="logo" className="mb-4 h-[150px] w-[190px] m-[auto]" />
+        <img src="/pixelcut-export.jpeg" alt="logo" className="mx-auto w-[150px] h-[120px]" />
         <p className="text-xl font-bold text-center mb-4">SIGN UP</p>
 
         {errors.root && (
@@ -73,7 +73,7 @@ function Signup() {
             },
           })}
           placeholder="Name"
-          className="w-11/12 mx-auto h-10 my-2 rounded px-2 border"
+          className="w-11/12 mx-auto h-[35px] my-2 rounded px-2 border"
         />
         {errors.name && <p className="text-red-500 ml-[10px]  text-[10px]">{errors.name.message}</p>}
 
@@ -86,7 +86,7 @@ function Signup() {
             },
           })}
           placeholder="Email"
-          className="w-11/12 mx-auto h-10 my-2 rounded px-2 border"
+          className="w-11/12 mx-auto  h-[35px] my-2 rounded px-2 border"
         />
         {errors.email && <p className="text-red-500 ml-[10px]   text-[10px]">{errors.email.message}</p>}
 
@@ -99,7 +99,7 @@ function Signup() {
             },
           })}
           placeholder="Mobile Number"
-          className="w-11/12 mx-auto h-10 my-2 rounded px-2 border"
+          className="w-11/12 mx-auto  h-[35px] my-2 rounded px-2 border"
         />
         {errors.mobial && <p className="text-red-500 ml-[10px]   text-[10px]">{errors.mobial.message}</p>}
 
@@ -112,7 +112,7 @@ function Signup() {
             },
           })}
           placeholder="Password"
-          className="w-11/12 mx-auto h-10 my-2 rounded px-2 border"
+          className="w-11/12 mx-auto  h-[35px] my-2 rounded px-2 border"
         />
         {errors.password && <p className="text-red-500 ml-[10px]  text-[10px]">{errors.password.message}</p>}
 
@@ -125,7 +125,7 @@ function Signup() {
             },
           })}
           placeholder="Confirm Password"
-          className="w-11/12 mx-auto h-10 my-2 rounded px-2 border"
+          className="w-11/12 mx-auto  h-[35px] my-2 rounded px-2 border"
         />
         {errors.conpassword && <p className="text-red-500 ml-[10px]  text-[10px]">{errors.conpassword.message}</p>}
 

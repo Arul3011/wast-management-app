@@ -13,7 +13,9 @@ export async function POST(response) {
   const client = await clientPromise;
   const db = await client.db("wasteuserdtabase");
   const dbres = await db.collection("users").insertOne(fetdata);
-  if (dbres) {
-    return NextResponse.json({ message: "addedd" });
+  if (dbres.acknowledged) {
+    return NextResponse.json({ created: true });
+  }else{
+    return NextResponse.json({ created: false });
   }
 }

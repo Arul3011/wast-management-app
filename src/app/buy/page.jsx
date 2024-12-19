@@ -10,6 +10,8 @@ import { useSession } from "next-auth/react";
 function Buy() {
   const [items, setItems] = useState([]);
   const { data: session, status } = useSession();
+  const [search,setSearch]=useState()
+  const [searchitems,setSearchitems]=useState([])
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -32,18 +34,25 @@ function Buy() {
        alert("log in to submit your queary")
       }
   }
+
+   const newaee = search && items.filter((item) => item.type.toLowerCase().includes(search.toLowerCase()))
+    
+
   return (
     <div className="buy-home">
     <OtherNav />
     <div className="buy-main mt-10 w-11/12 mx-auto">
-      <input
+      {/* <input
         type="text"
         placeholder="Search..."
+        onChange={(e)=>setSearch(e.target.value)}
+        value={search}
         className="w-full max-w-[600px] border-[1px] border-black mx-auto text-lg py-3 px-6 rounded-full mt-8"
-      />
+      /> */}
     </div>
     <div className="buy-cards flex flex-wrap justify-between mt-8">
-      {items.length === 0 ? (
+     
+      { items && items.length === 0 ? (
         <p className="w-full h-[40vh] text-center text-lg font-medium">Loading...</p>
       ) : items.length > 0 ? (
         items.map((val) => (

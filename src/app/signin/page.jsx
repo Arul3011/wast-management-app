@@ -1,13 +1,16 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-// import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function SignIn() {
+import { useRouter } from 'next/navigation'
+ 
+
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  // const router = useRouter();
+  const router= useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,46 +18,62 @@ export default function SignIn() {
     const result = await signIn("credentials", {
       email,
       password,
-      redirect: false, // Prevent automatic redirect
+      redirect: false, 
     });
 
     if (result.error) {
       setError("Invalid email or password");
     } else {
-    alert("scucrss")
-      // router.push("/dashboard"); // Redirect to a protected page
+      alert("Success");
+      router.push('/')
+      document.cookie = `email=${email}; expires=fri, path=/`;
     }
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "2rem" }}>
-      <h1>Sign In</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Enter your email"
-          />
+    <div className="w-full h-screen flex justify-center items-center bg-cover bg-no-repeat backdrop-blur-[100px]"
+    style={{
+      backgroundImage: "url('/SAVE_20240917_130447.jpg')",
+      backdropFilter: "blur(10px)",
+    }}
+        >
+      <form onSubmit={handleSubmit} className="w-[400px] p-5 flex flex-col bg-white shadow-md rounded-lg">
+        <img src="/pixelcut-export.jpeg" alt="logo" className="mx-auto w-[180px] h-[140px]" />
+        <p className="text-center text-xl font-semibold mt-2">LOGIN</p>
+        
+        {/* Email input */}
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-[80%] mx-auto h-8 mt-3 mb-3 px-3 rounded-lg border border-gray-300"
+        />
+        
+      
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-[80%] mx-auto h-8 mb-3 px-3 rounded-lg border border-gray-300"
+        />
+        
+      
+        <div className="flex justify-center text-sm text-blue-600 mt-2 w-[100%]">
+          <Link href="/register" className="hover:underline">Create account</Link>
+         
         </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Enter your password"
-          />
-        </div>
-        <button type="submit" style={{ marginTop: "1rem" }}>
-          Sign In
-        </button>
+        
+   
+        <input
+          type="submit"
+          value="Login"
+          className="w-36 mx-auto mt-4 py-2 text-white bg-green-600 border-0 rounded-lg cursor-pointer hover:bg-green-700"
+        />
       </form>
     </div>
   );
 }
+
+export default Login;

@@ -37,7 +37,8 @@ function Profile() {
         });
         const jsonpost = await poste.json();
         if (jsonpost) {
-          console.log(jsonpost);
+          setPostes(jsonpost.dbrespinse);
+          
           
         }
       } catch (error) {
@@ -62,6 +63,7 @@ function Profile() {
         if (jsonpost) {
       
           setUserdetail(jsonpost.dbrespinse[0])
+          // console.log(jsonpost.dbrespinse[0])
           
         }
       } catch (error) {
@@ -69,14 +71,11 @@ function Profile() {
       }
     };
 
-//     fetchPosts();
-//     fetchUserDetails();
-//   }, [userID]);
 
 useEffect(()=>{
 if(session){
  fetchUserDetails()
-
+ fetchPosts()
  };
 
 },[])
@@ -87,7 +86,7 @@ if(session){
       <OtherNav />
 
 
-      <div className="flex w-4/5 mx-auto border border-black rounded-lg mt-10 p-4">
+      <div className="flex w-4/5 mx-auto border border-black rounded-lg mt-10 h-auto p-4">
         <div className="w-1/2 flex justify-center items-center">
           <img
             src="/profile.png"
@@ -103,10 +102,8 @@ if(session){
         </div>
       </div>
 
-      {/* Divider */}
       <hr className="w-11/12 mx-auto my-10 border-t-2 border-black" />
 
-      {/* Product Posts Section */}
       <div className="w-4/5 mx-auto">
         <h1 className="text-center text-2xl font-semibold mb-6">PRODUCTS</h1>
         {!postes ? (
@@ -137,8 +134,10 @@ if(session){
                   <CiLocationOn className="mr-2" />
                   {val.location}
                 </p>
-                <button className="bg-green-500 text-white px-6 py-2 rounded-lg font-semibold">
-                  BUY
+                <button
+                onClick={()=>alert("do you want to delete this post")}
+                className="bg-red-500 text-white px-6 py-2 rounded-lg font-semibold">
+             DELETE
                 </button>
               </div>
             </div>
