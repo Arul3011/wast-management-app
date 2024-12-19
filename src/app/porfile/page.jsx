@@ -9,57 +9,77 @@ function Profile() {
   const { data: session, status } = useSession();
   const [postes, setPostes] = useState([]);
   const [userdetail, setUserdetail] = useState({
-    "mobialNum":987213471,
-    "name":"Arul",
-    "email":"Admin@gmail.com"
+    // "mobialNum":987213471,
+    // "name":"Arul",
+    // "email":"Admin@gmail.com"
   });
-//   useEffect(() => {
-//     const fetchPosts = async () => {
-//       try {
-//         const poste = await fetch("http://localhost:3000/api/posts/getpost", {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({
-//             email: session.user.email,
-//           }),
-//         });
-//         const jsonpost = await poste.json();
-//         if (jsonpost) {
-//           setPostes(jsonpost.insertresponse);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching posts:", error);
-//       }
-//     };
 
-//     const fetchUserDetails = async () => {
-//       try {
-//         const poste = await fetch(
-//           "http://localhost:3000/api/user/userdetails",
-//           {
-//             method: "POST",
-//             headers: {
-//               "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({
-//               userID: userID,
-//             }),
-//           }
-//         );
-//         const jsonpost = await poste.json();
-//         if (jsonpost) {
-//           setUserdetail(jsonpost.dbresponsre[0]);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching user details:", error);
-//       }
-//     };
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+  
+  // Example usage
+
+  
+
+    const fetchPosts = async () => {
+      try {
+        const poste = await fetch("/api/userpost", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: session.user.email,
+          }),
+        });
+        const jsonpost = await poste.json();
+        if (jsonpost) {
+          console.log(jsonpost);
+          
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    const fetchUserDetails = async () => {
+      try {
+        const poste = await fetch("/api/userdetails",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: session.user.email,
+            }),
+          }
+        );
+        const jsonpost = await poste.json();
+        if (jsonpost) {
+      
+          setUserdetail(jsonpost.dbrespinse[0])
+          
+        }
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
 
 //     fetchPosts();
 //     fetchUserDetails();
 //   }, [userID]);
+
+useEffect(()=>{
+if(session){
+ fetchUserDetails()
+
+ };
+
+},[])
 
   return (
     <>

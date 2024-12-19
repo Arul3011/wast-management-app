@@ -37,7 +37,7 @@ const Sell = () => {
       alert("Please choose a file first.");
     }
 
-    if (downloadURL) {
+    if (downloadURL && session) {
       try {
         const dbres = await fetch("/api/posts", {
           method: "POST",
