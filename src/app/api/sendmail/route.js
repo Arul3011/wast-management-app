@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import sendEmail from "@/lib/mail";
+import clientPromise from "@/lib/mongodb";
 
 export async function GET() {
     return NextResponse.json({ status: true });
@@ -48,20 +49,25 @@ export async function GET() {
 }
 
 export async function POST(request) {
+
     const resdata = await request.json();
-    const product = `  
+    const client = await clientPromise;
+    const db = await client.db("wasteuserdtabase");
+    const dbres = await db.collection("users").findOne({ email:  resdata.email});
+    if(dbres){
+         const product = `  
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; max-width: 600px; margin: auto;">
       <h2 style="color: #007BFF; text-align: center;">Recycle Rally Product Request</h2>
       <p>Dear Seller,</p>
       <p>We have received a request for one of your products on the <b>Recycle Rally</b> site.</p>
       <p><b>Details of the request:</b></p>
       <ul style="list-style-type: none; padding: 0;">
-        <li><b>Name:</b> ${resdata.name}</li>
-        <li><b>Mobile Number:</b> ${resdata.mobialNum}</li>
+        <li><b>Name:</b> ${dbres.name}</li>
+        <li><b>Mobile Number:</b> ${dbres.mobialNum}</li>
         <li><b>Product:</b> ${resdata.type}</li>
       </ul>
       <center>
-        <a href='tel:${resdata.mobialNum}' style="
+        <a href='tel:${dbres.mobialNum}' style="
         display: inline-block;
         background-color: #28a745; 
         color: white; 
@@ -79,16 +85,19 @@ export async function POST(request) {
     </div>
   `
     const mailstst = await sendEmail(
-        resdata.email,
+        resdata.clientemail,
         "Request to buy your product",
         product
     );
     if (mailstst) {
         return NextResponse.json({
-            states: true,
+          resstates: true,
         });
+    }else{
+      return NextResponse.json({resstates:false})
     }
-    return NextResponse.json({
-        states: false,
-    });
+  
+  }else{
+    return NextResponse.json({resstates:false})
+  }
 }

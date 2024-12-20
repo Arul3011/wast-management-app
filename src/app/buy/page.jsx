@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { GiWeight } from "react-icons/gi";
 import { useSession } from "next-auth/react";
+import Cookies from "js-cookie";
 
 function Buy() {
   const [items, setItems] = useState([]);
@@ -18,7 +19,6 @@ function Buy() {
         const posts = await fetch("/api/posts");
         const jsonpost = await posts.json();
         if (jsonpost) {
-          console.log(jsonpost);
           setItems(jsonpost.dbresponse);
         }
       } catch (error) {
@@ -26,10 +26,27 @@ function Buy() {
       }
     };
     fetchPosts();
+   
   }, []);
-  const hangelorder = async()=>{
+  const hangelorder = async(type,sellerEmail)=>{
       if(session){
-        alert("order query send sucessfully seller will contact you")
+        const fdata = await fetch('/api/sendmail',{
+          method:"POST",
+          headers:{
+            "Content-Type": "application/json",
+          },
+          body:JSON.stringify({
+            email: Cookies.get("email"),
+            type:type,
+            clientemail:sellerEmail
+          })
+        })
+        const jres = await fdata.json()
+        if(jres.resstates){
+          alert("order query send sucessfully seller will contact you")
+        }else{
+          alert("something went worng try again later")
+        }
       }else{
        alert("log in to submit your queary")
       }
@@ -80,7 +97,7 @@ function Buy() {
                 </p>
                 <button
                   className="bg-green-500 text-white px-8 py-3 rounded-md hover:bg-green-400 transition w-full mt-4"
-                  onClick={()=>{hangelorder()}}
+                  onClick={()=>{hangelorder(val.type,val.userID)}}
                 >
                   BUY
                 </button>

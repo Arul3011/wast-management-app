@@ -21,7 +21,7 @@ function OtherNav() {
     const handleSignOut = async () => {
       
       await signOut({
-        redirect: false,  // Automatically redirect after sign-out
+        redirect: true,  // Automatically redirect after sign-out
         callbackUrl: "/", 
       });
      Cookie.remove("email")
