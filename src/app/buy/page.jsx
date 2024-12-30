@@ -1,18 +1,27 @@
 "use client";
 import Footer from "@/componuntes/Fotter";
 import OtherNav from "@/componuntes/OtherNav";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { CiLocationOn } from "react-icons/ci";
 import { GiWeight } from "react-icons/gi";
 import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
+import Loader from "@/componuntes/Svg";
 
 function Buy() {
   const [items, setItems] = useState([]);
   const { data: session, status } = useSession();
   const [search,setSearch]=useState()
   const [searchitems,setSearchitems]=useState([])
+  const dialogRef = useRef(null)
+  const openDialog = () => {
+    dialogRef.current.showModal(); // Opens the dialog as a modal
+  };
+
+  const closeDialog = () => {
+    dialogRef.current.close(); // Closes the dialog
+  };
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -29,7 +38,9 @@ function Buy() {
    
   }, []);
   const hangelorder = async(type,sellerEmail)=>{
+    openDialog();
       if(session){
+
         const fdata = await fetch('/api/sendmail',{
           method:"POST",
           headers:{
@@ -43,6 +54,7 @@ function Buy() {
         })
         const jres = await fdata.json()
         if(jres.resstates){
+          closeDialog();
           alert("order query send sucessfully seller will contact you")
         }else{
           alert("something went worng try again later")
@@ -52,9 +64,9 @@ function Buy() {
       }
   }
 
-   const newaee = search && items.filter((item) => item.type.toLowerCase().includes(search.toLowerCase()))
+  //  const newaee = search && items.filter((item) => item.type.toLowerCase().includes(search.toLowerCase()))
     
-
+   
   return (
     <div className="buy-home">
     <OtherNav />
@@ -98,6 +110,7 @@ function Buy() {
                 <button
                   className="bg-green-500 text-white px-8 py-3 rounded-md hover:bg-green-400 transition w-full mt-4"
                   onClick={()=>{hangelorder(val.type,val.userID)}}
+                 
                 >
                   BUY
                 </button>
@@ -112,6 +125,10 @@ function Buy() {
       )}
     </div>
     <Footer />
+    <dialog ref={dialogRef} className="bg-transparent border-none">
+      <Loader />
+      <p className="text-center">loading.....</p>
+    </dialog>
   </div>
   );
 }

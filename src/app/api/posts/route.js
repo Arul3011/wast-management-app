@@ -30,7 +30,7 @@ export async function DELETE(response) {
   const db = await client.db("wasteuserdtabase");
   const insertresponse = await db
     .collection("posts")
-    .deleteOne({ _id: new ObjectId(fetdata._id) });
+    .deleteOne({ _id: new ObjectId(fetdata.id) });
   return NextResponse.json({ message: insertresponse.acknowledged });
 }
 

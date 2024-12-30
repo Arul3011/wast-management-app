@@ -71,7 +71,7 @@ const Sell = () => {
 return (
     <>
 <OtherNav />
-      <div className="sell-feild  flex justify-around h-[100vh] mt-[60px]">
+      <div className="sell-feild  flex justify-around h-[auto] mt-[60px] flex-wrap ">
         <div className="sell-text text-green-600 w-[50%] mt-[80px]">
           <div className="main-text-sce text-center">
             <h3 className="uppercase text-xl font-semibold mb-4">Get the best price for your bulk plastic</h3>
@@ -85,13 +85,13 @@ return (
 <div>
 
 
-        <form  className="w-96 bg-green-600 text-white p-6 rounded-xl" onSubmit={handleSubmit(onSubmit)}>
+        <form  className="w-[90%] bg-green-600 text-white p-6 rounded-xl " onSubmit={handleSubmit(onSubmit)}>
           <p className="text-center text-xl mb-4">Fill the details</p>
           <input
             type="text"
             name="type"
             placeholder="Material Type"
-            className="w-4/5 mx-auto block p-2 mb-4 text-sm text-black rounded-md"
+            className="w-[90%] mx-auto block p-2 mb-4 text-sm text-black rounded-md"
             {...register("type", {
               required: {
                 value: true,
@@ -106,7 +106,7 @@ return (
             type="text"
             name="quantity"
             placeholder="Quantity (kg)"
-            className="w-4/5 mx-auto p-2 block mb-4 text-sm text-black rounded-md"
+            className="w-[90%] mx-auto p-2 block mb-4 text-sm text-black rounded-md"
             {...register("quantity", {
               required: {
                 value: true,
@@ -122,7 +122,7 @@ return (
             type="text"
             name="location"
             placeholder="Location"
-            className="w-4/5 mx-auto block text-black p-2 mb-4 text-sm rounded-md"
+            className="w-[90%] mx-auto block text-black p-2 mb-4 text-sm rounded-md"
             {...register("location", {
               required: {
                 value: true,
@@ -137,7 +137,7 @@ return (
             type="file"
             accept="image/*"
             name="file"
-             className="w-4/5 mx-auto block text-black p-2 mb-4 bg-[#fff] placeholder:text-gray-400 text-sm rounded-md"
+             className="w-[90%] mx-auto block text-black p-2 mb-4 bg-[#fff] placeholder:text-gray-400 text-sm rounded-md"
             {...register("file", {
               required: {
                 value: true,
@@ -151,7 +151,7 @@ return (
           <textarea
             name="description"
             placeholder="Description"
-            className="w-4/5 mx-auto block p-2 mb-4 text-black text-sm rounded-md"
+            className="w-[90%] mx-auto block p-2 mb-4 text-black text-sm rounded-md"
             {...register("description", {
               required: {
                 value: true,

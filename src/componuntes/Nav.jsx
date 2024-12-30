@@ -1,31 +1,41 @@
 "use client"; 
-
-import { useSession } from "next-auth/react";
+import { FaBars } from "react-icons/fa";
+import Cookie from "js-cookie";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Nav = () => {
   const { data: session, status } = useSession();
+   const handleSignOut = async () => {
+        
+        await signOut({
+          redirect: true,  
+          callbackUrl: "/", 
+        });
+        Cookie.remove("email")
+      };
   return (
-    <div className="flex w-[90%] h-[20px] px-0 my-[15px] mb-[20px]">
+    <div className="flex w-[90%] h-[20px] px-0 my-[15px] mb-[20px] m-[auto] justify-between">
       <Link href="/" className="flex w-[50%]">
         <img
           src="/pixelcut-export.jpeg"
           alt="logo"
           className="w-[100px] h-[70px] mt-[-10px]"
         />
-        <p className="mt-[15px]">RECYCLE RALLY</p>
+        <p className="mt-[15px] sm:text-xs text-sm" >RECYCLE RALLY</p>
       </Link>
-      <div className="flex justify-between w-[50%]">
-        <a className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
+     
+      <div className="md:flex hidden justify-between w-[50%]">
+        <a href="#home" className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
           Home
         </a>
-        <a className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
+        <a href="#about" className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
           About Us
         </a>
-        <a className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
+        <a href="#blog" className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
           Blog
         </a>
-        <a className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
+        <a href="#contact" className="w-[150px] h-[40px] rounded-[5px] mt-[10px] text-[0.9em] cursor-pointer hover:text-[#189b2c]">
           Contact
         </a>
        { session ? (
@@ -39,12 +49,12 @@ const Nav = () => {
               </Link>
             </span>
             <span>
-              <Link
-                href="/api/auth/signout"
+            <button
+                onClick={handleSignOut}
                  className="w-[100px] h-[35px] rounded-[5px] m-[0_10px] bg-white border-[#189b2c] border-solid border-[1px] font-semibold flex justify-center items-center"
               >
                 Logout
-              </Link>
+              </button>
             </span>
           </>
         ) : (
@@ -64,7 +74,11 @@ const Nav = () => {
           </>
         )}
       </div>
-    </div>
+      <div className="md:hidden flex justify-end w-[30%]  ">
+      <FaBars className="text-[30px]" />
+      </div>
+      </div>
+    
   );
 };
 

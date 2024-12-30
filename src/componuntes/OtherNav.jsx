@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { CgProfile } from "react-icons/cg";
 import { signOut } from "next-auth/react";
 import Cookie from "js-cookie";
+import { FaBars } from "react-icons/fa";
 function OtherNav() {
   const { data: session, status } = useSession();
     
@@ -27,16 +28,17 @@ function OtherNav() {
      Cookie.remove("email")
     };
   return (
-    <div className="flex w-[90%] h-[20px] px-0 my-[15px] mb-[20px] m-[auto]">
+    <div className="flex w-[90%] h-[20px] px-0 my-[15px] mb-[20px] m-[auto] justify-between">
       <Link href='/' className="flex w-[50%]">
         <img
           src="/pixelcut-export.jpeg"
           alt="logo"
           className="w-[100px] h-[70px] mt-[-10px]"
         />
-        <p className="mt-[15px]">RECYCLE RALLY</p>
+        <p className="mt-[15px] sm:text-xs text-sm" >RECYCLE RALLY</p>
       </Link>
       <div className="flex justify-end w-[50%]">
+      <div className="sm:flex hidden" >
       { session ? (
           <>
             <span>
@@ -53,7 +55,6 @@ function OtherNav() {
             </span>
             <span>
               <button
-                // href="/api/auth/signout"
                 onClick={handleSignOut}
                  className="w-[100px] h-[35px] rounded-[5px] m-[0_10px] bg-white border-[#189b2c] border-solid border-[1px] font-semibold flex justify-center items-center"
               >
@@ -77,6 +78,10 @@ function OtherNav() {
             </Link>
           </>
         )}
+        </div>
+         <div className="md:hidden flex justify-end w-[30%]  ">
+              <FaBars className="text-[30px]" />
+              </div>
       </div>
       <dialog   ref={dialogRef}   className="bg-white p-6 rounded-lg shadow-lg max-w-sm mx-auto z-50">
         test
