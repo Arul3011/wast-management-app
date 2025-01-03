@@ -15,12 +15,12 @@ const Nav = () => {
         Cookie.remove("email")
       };
   return (
-    <div className="flex w-[90%] h-[auto] px-0 my-[15px] mb-[20px] m-[auto] justify-between sticky top-0 items-center bg-[#fff]">
+    <div className="flex w-[90%] rounded-[10px] h-[auto] px-0 my-[15px] mb-[20px] m-[auto] justify-between sticky top-1 items-center bg-[#fff]">
       <Link href="/" className="flex w-[50%]">
         <img
           src="/pixelcut-export.jpeg"
           alt="logo"
-          className="w-[100px] h-[70px] mt-[-10px]"
+          className="w-[100px] ml-[10px] h-[70px] mt-[-10px]"
         />
         <p className="mt-[15px] sm:text-xs text-sm" >RECYCLE RALLY</p>
       </Link>
