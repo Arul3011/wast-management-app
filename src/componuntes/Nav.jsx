@@ -15,7 +15,7 @@ const Nav = () => {
         Cookie.remove("email")
       };
   return (
-    <div className="flex w-[90%] h-[20px] px-0 my-[15px] mb-[20px] m-[auto] justify-between">
+    <div className="flex w-[90%] h-[auto] px-0 my-[15px] mb-[20px] m-[auto] justify-between sticky top-0 items-center bg-[#fff]">
       <Link href="/" className="flex w-[50%]">
         <img
           src="/pixelcut-export.jpeg"

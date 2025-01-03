@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="w-full bg-[#bbe4bb] py-[20px]">
+    <div className="w-full bg-[#bbe4bb] py-[20px]" id="about">
       <h1 className="text-center text-[30px] py-[20px]">About Us</h1>
       <h2 className="text-center text-[30px] py-[20px] text-green-600">TRADING WASTE COMMODITIES</h2>
       <h3 className="text-center text-[30px] py-[20px]">The Global Waste Marketplace</h3>

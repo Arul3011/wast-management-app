@@ -6,7 +6,7 @@ function Bsm() {
  
 
   return (
-    <div className="flex bg-[#fff] justify-around items-center flex-wrap my-[60px] gap-[20px] w-[94%] mx-auto">
+    <div className="flex bg-[#fff] justify-around items-center flex-wrap my-[60px] gap-[20px] w-[94%] mx-auto" id="home">
     
       <div className="bg-[#189b2c] w-[400px] rounded-[20px] p-[15px]">
         <h2 className="text-white text-center mb-[15px]">Buy Material</h2>

@@ -13,7 +13,7 @@ export default async function Home() {
  <div>
   <Nav />
   <Bsm  />
-  <About />
+  <About  id="about"/>
   <h1 className="text-center text-green-600 text-[2em] mt-[30px]">Contact us</h1>
   <Contact />
     <Footer />

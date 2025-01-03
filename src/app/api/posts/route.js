@@ -28,10 +28,12 @@ export async function DELETE(response) {
   const fetchdata = await response;
   const fetdata = await fetchdata.json();
   const db = await client.db("wasteuserdtabase");
-  const insertresponse = await db
-    .collection("posts")
-    .deleteOne({ _id: new ObjectId(fetdata.id) });
-  return NextResponse.json({ message: insertresponse.acknowledged });
+  const insertresponse = await db.collection("posts").deleteOne({ _id: fetdata.id })
+    if(insertresponse){
+      console.log(insertresponse);
+      
+      return NextResponse.json({ sts: insertresponse.acknowledged });
+    } 
 }
 
 export async function PATCH(response) {

@@ -1,41 +1,72 @@
+
+
 export default function LoadingPage() {
     return (
-        <div className="block m-auto">
-            <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
-                        <stop stopColor="#000" stopOpacity="0" offset="0%" />
-                        <stop stopColor="#000" stopOpacity=".631" offset="63.146%" />
-                        <stop stopColor="#000" offset="100%" />
-                    </linearGradient>
-                </defs>
-                <g fill="none" fillRule="evenodd">
-                    <g transform="translate(1 1)">
-                        <path 
-                            d="M36 18c0-9.94-8.06-18-18-18" 
-                            id="Oval-2" 
-                            stroke="url(#a)" 
-                            strokeWidth="2">
-                            <animateTransform
-                                attributeName="transform"
-                                type="rotate"
-                                from="0 18 18"
-                                to="360 18 18"
-                                dur="0.9s"
-                                repeatCount="indefinite" />
-                        </path>
-                        <circle fill="#000" cx="36" cy="18" r="1">
-                            <animateTransform
-                                attributeName="transform"
-                                type="rotate"
-                                from="0 18 18"
-                                to="360 18 18"
-                                dur="0.9s"
-                                repeatCount="indefinite" />
-                        </circle>
-                    </g>
-                </g>
-            </svg>
-        </div>
+        <div className="w-[100%] h-[100vh] flex justify-center items-center">
+      <style>
+        {`
+          @keyframes circle7124 {
+            0% {
+              top: 60px;
+              height: 5px;
+              border-radius: 50px 50px 25px 25px;
+              transform: scaleX(1.7);
+            }
+            40% {
+              height: 20px;
+              border-radius: 50%;
+              transform: scaleX(1);
+            }
+            100% {
+              top: 0%;
+            }
+          }
+
+          @keyframes shadow046 {
+            0% {
+              transform: scaleX(1.5);
+            }
+            40% {
+              transform: scaleX(1);
+              opacity: 0.7;
+            }
+            100% {
+              transform: scaleX(0.2);
+              opacity: 0.4;
+            }
+          }
+        `}
+      </style>
+      <div className="relative w-52 h-15">
+        {/* Circles */}
+        <div
+          className="absolute w-5 h-5 bg-black rounded-full left-[15%] origin-center"
+          style={{ animation: "circle7124 0.5s alternate infinite ease" }}
+        ></div>
+        <div
+          className="absolute w-5 h-5 bg-black rounded-full left-[45%] origin-center"
+          style={{ animation: "circle7124 0.5s alternate infinite ease", animationDelay: "0.2s" }}
+        ></div>
+        <div
+          className="absolute w-5 h-5 bg-black rounded-full right-[15%] origin-center"
+          style={{ animation: "circle7124 0.5s alternate infinite ease", animationDelay: "0.3s" }}
+        ></div>
+
+        {/* Shadows */}
+        <div
+          className="absolute w-5 h-1 bg-black/90 rounded-full top-[62px] origin-center blur-sm left-[15%] z-[-1]"
+          style={{ animation: "shadow046 0.5s alternate infinite ease" }}
+        ></div>
+        <div
+          className="absolute w-5 h-1 bg-black/90 rounded-full top-[62px] origin-center blur-sm left-[45%] z-[-1]"
+          style={{ animation: "shadow046 0.5s alternate infinite ease", animationDelay: "0.2s" }}
+        ></div>
+        <div
+          className="absolute w-5 h-1 bg-black/90 rounded-full top-[62px] origin-center blur-sm right-[15%] z-[-1]"
+          style={{ animation: "shadow046 0.5s alternate infinite ease", animationDelay: "0.3s" }}
+        ></div>
+      </div>
+    </div>
     );
 }
+

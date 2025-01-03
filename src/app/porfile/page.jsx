@@ -19,8 +19,6 @@ function Profile() {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(";").shift();
   }
-  
-  // Example usage
 
   
 
@@ -42,7 +40,7 @@ function Profile() {
           
         }
       } catch (error) {
-        console.error("Error fetching posts:", error);
+        console.log("Error fetching posts:", error);
       }
     };
 
@@ -63,11 +61,11 @@ function Profile() {
         if (jsonpost) {
       
           setUserdetail(jsonpost.dbrespinse[0])
-          // console.log(jsonpost.dbrespinse[0])
+        
           
         }
       } catch (error) {
-        console.error("Error fetching user details:", error);
+        console.log("Error fetching user details:", error);
       }
     };
 
@@ -79,7 +77,22 @@ if(session){
  };
 
 },[])
+const handelDeletPost =async(id)=>{
+  const dbres = await fetch("/api/posts",{
+  method: 'DELETE', 
+            headers: { 
+                'Content-type': 'application/json'
+            } ,
+            body:JSON.stringify(id)
+  });
+  const jres = await dbres.json();
+  if(jres){
+  // alert("post deleted")
+  console.log(jres.sts);
+  
+  }
 
+}
   return (
     <>
 
@@ -107,9 +120,10 @@ if(session){
       <div className="w-4/5 mx-auto">
         <h1 className="text-center text-2xl font-semibold mb-6">PRODUCTS</h1>
         {!postes ? (
-          <p>Loading...</p>
+           <p>No posts available</p>
         ) : postes.length === 0 ? (
-          <p>No posts available</p>
+        
+           <p>Loading...</p>
         ) : (
           postes.map((val) => (
             <div
@@ -135,7 +149,7 @@ if(session){
                   {val.location}
                 </p>
                 <button
-                onClick={()=>alert("do you want to delete this post")}
+                onClick={()=> handelDeletPost(val._id)}
                 className="bg-red-500 text-white px-6 py-2 rounded-lg font-semibold">
              DELETE
                 </button>

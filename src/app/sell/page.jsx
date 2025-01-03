@@ -16,12 +16,10 @@ const Sell = () => {
   const {
     register,
     handleSubmit,
+    resetField,
     formState: { errors, isSubmitting },
   } = useForm();
 
-  // if (session) {
-  //   console.log(session.user.email);
-  //   }
   const onSubmit = async (data) => {
     const file = data.file[0];
     if (file) {
@@ -58,6 +56,11 @@ const Sell = () => {
           const dbjson = await dbres.json();
           if (dbjson.messege === "added") {
             alert("Product Added");
+            resetField("location");
+            resetField("type");
+            resetField("description");
+            resetField("quantity");
+            resetField("file");
           } else {
             alert("something went wrong");
           }
