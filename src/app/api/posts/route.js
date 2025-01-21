@@ -27,13 +27,18 @@ export async function POST(response) {
 export async function DELETE(response) {
   const fetchdata = await response;
   const fetdata = await fetchdata.json();
+  console.log(fetdata.id);
+  
   const db = await client.db("wasteuserdtabase");
-  const insertresponse = await db.collection("posts").deleteOne({ _id: fetdata.id })
+  const insertresponse = await db.collection("posts")
+  .deleteOne({_id: new ObjectId(fetdata.id)});
+  // { _id: fetdata.id }
     if(insertresponse){
       console.log(insertresponse);
-      
       return NextResponse.json({ sts: insertresponse.acknowledged });
+      // return NextResponse.json({ sts: true });
     } 
+  // return NextResponse.json({sts:false})
 }
 
 export async function PATCH(response) {

@@ -8,11 +8,7 @@ import { useSession } from "next-auth/react";
 function Profile() {
   const { data: session, status } = useSession();
   const [postes, setPostes] = useState([]);
-  const [userdetail, setUserdetail] = useState({
-    // "mobialNum":987213471,
-    // "name":"Arul",
-    // "email":"Admin@gmail.com"
-  });
+  const [userdetail, setUserdetail] = useState({});
 
   function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -83,16 +79,19 @@ const handelDeletPost =async(id)=>{
             headers: { 
                 'Content-type': 'application/json'
             } ,
-            body:JSON.stringify(id)
+            body:JSON.stringify({id:id})
   });
   const jres = await dbres.json();
   if(jres){
   // alert("post deleted")
-  console.log(jres.sts);
+  if(jres.sts){
+    setPostes(postes.filter(val => val._id !== id))
+  }
+  // console.log(id);
   
   }
-
 }
+
   return (
     <>
 
