@@ -10,7 +10,7 @@ import { options } from "./api/auth/[...nextauth]/options";
 export default async function Home() {
  const session = await getServerSession(options);
   return (
- <div>
+ <div style={{"scrollBehavior": "smooth"}}>
   <Nav />
   <Bsm  />
   <About  id="about"/>

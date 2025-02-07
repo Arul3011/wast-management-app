@@ -166,12 +166,20 @@ return (
             <p className="text-red-500 text-sm p-0"> {errors.location.message}</p>
           )}
           <button
+            disabled={true}
+            type="submit"
+          
+            className="w-1/2 mx-auto bg-white block  text-green-600 py-1 mb-[10px] rounded-full font-semibold text-sm hover:bg-green-600 hover:text-[#fff] border-[1px] border-[#fff] transition-all duration-300 ease-in-out" 
+          >
+        {isSubmitting ? "Loading.." : "uplodeimage"}
+          </button>
+          <button
             disabled={isSubmitting}
             type="submit"
           
-            className="w-1/2 mx-auto bg-white block  text-green-600 py-2 rounded-full font-semibold text-lg hover:bg-green-600 hover:text-[#fff] border-[2px] border-[#fff] transition-all duration-300 ease-in-out" 
+            className="w-1/2 mx-auto bg-white block  text-green-600 py-1 rounded-full font-semibold text-lg hover:bg-green-600 hover:text-[#fff] border-[2px] border-[#fff] transition-all duration-300 ease-in-out" 
           >
-        {isSubmitting ? "Loading.." : "Submit"}
+        {isSubmitting ? "Loading.." : "submit"}
           </button>
           {errors.root && <p className="text-red-500 text-sm p-0"> {errors.root.message}</p>}
         </form>

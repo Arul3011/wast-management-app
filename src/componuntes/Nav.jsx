@@ -49,12 +49,12 @@ const Nav = () => {
           >
             About Us
           </a>
-          <a
+          {/* <a
             href="#blog"
             className="text-[0.9em] cursor-pointer hover:text-[#189b2c]"
           >
             Blog
-          </a>
+          </a> */}
           <a
             href="#contact"
             className="text-[0.9em] cursor-pointer hover:text-[#189b2c]"
