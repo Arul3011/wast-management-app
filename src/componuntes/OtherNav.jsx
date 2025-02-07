@@ -52,7 +52,7 @@ function OtherNav() {
           <>
             <span>
               <Link
-                href="/profile"
+                href="/porfile"
                 className="w-[100px] h-[35px] rounded-[5px] m-[0_10px] bg-[#189b2c] text-white border-none flex justify-center items-center"
               >
                 Profile
