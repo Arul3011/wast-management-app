@@ -98,15 +98,15 @@ const handelDeletPost =async(id)=>{
       <OtherNav />
 
 
-      <div className="flex w-4/5 mx-auto border border-black rounded-lg mt-10 h-auto p-4">
-        <div className="w-1/2 flex justify-center items-center">
+      <div className="flex w-4/5 mx-auto border border-black rounded-lg mt-10 h-auto p-4 flex-col md:flex-row">
+        <div className="md:w-1/2 w-[100%] flex justify-center items-center">
           <img
             src="/profile.png"
             alt="profile img"
-            className="w-72 h-72 rounded-full border-4 border-gray-300 "
+            className="w-[100px] md:h-[100px] w- rounded-full border-4 border-gray-300 "
           />
         </div>
-        <div className="w-1/2 flex flex-col items-center justify-center">
+        <div className="md:w-1/2 w-[100%] flex flex-col items-center justify-center">
           <h2 className="text-2xl font-semibold mb-4">PROFILE</h2>
           <p className="text-lg">{userdetail.name}</p>
           <p className="text-lg">{userdetail.email}</p>

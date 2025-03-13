@@ -90,21 +90,21 @@ const Sell = () => {
 return (
     <>
 <OtherNav />
-      <div className="sell-feild  flex justify-around h-[auto] mt-[60px] flex-wrap ">
-        <div className="sell-text text-green-600 w-[50%] mt-[80px]">
+      <div className="sell-feild w-[100%]  flex items-center justify-around h-[auto] mt-[60px] flex-wrap md:flex-row  flex-col-reverse  ">
+        <div className="sell-text text-green-600 w-[40%] mt-[80px]">
           <div className="main-text-sce text-center">
+            <img src="/pixelcut-export.jpeg" alt="logo" className="mx-auto mb-4 w-[300px] h-[200px]" />
             <h3 className="uppercase text-xl font-semibold mb-4">Get the best price for your bulk plastic</h3>
             <h1 className="text-4xl font-bold mb-4">Sell Your Plastic Material</h1>
             <p className="text-lg text-justify mb-4">
               WasteTrade makes it easier than ever to sell waste commodities for the best prices to the most sustainable reprocessors.
             </p>
-            <img src="/pixelcut-export.jpeg" alt="logo" className="mx-auto mb-4 w-[300px] h-[200px]" />
           </div>
         </div>
-<div>
+<div className="flex justify-center w-[100%] md:w-[40%]">
 
 
-        <form  className="w-[90%] bg-green-600 text-white p-6 rounded-xl " onSubmit={handleSubmit(onSubmit)}>
+        <form  className="w-[80%] md:w-[100%] bg-green-600 text-white p-6 rounded-xl " onSubmit={handleSubmit(onSubmit)}>
           <p className="text-center text-xl mb-4">Fill the details</p>
           <input
             type="text"
@@ -182,20 +182,12 @@ return (
           {errors.description && (
             <p className="text-red-500 text-sm p-0"> {errors.description.message}</p>
           )}
-          {/* <button
-            // disabled={true}
-            type="submit"
-          // onClick={handelimguplode}
-            className="w-1/2 mx-auto bg-white block  text-green-600 py-1 mb-[10px] rounded-full font-semibold text-sm hover:bg-green-600 hover:text-[#fff] border-[1px] border-[#fff] transition-all duration-300 ease-in-out" 
-          >
-        {isSubmitting ? "Loading.." : "uplodeimage"}
-          </button> */}
+         
           <button
             disabled={isSubmitting}
             type="submit"
-          
-            className="w-1/2 mx-auto bg-white block  text-green-600 py-1 rounded-full font-semibold text-lg hover:bg-green-600 hover:text-[#fff] border-[2px] border-[#fff] transition-all duration-300 ease-in-out" 
-          >
+            className="w-1/2 line-clamp-2 mx-auto bg-white block  text-green-600 py-1 rounded-full font-semibold text-lg hover:bg-green-600 hover:text-[#fff] border-[2px] border-[#fff] transition-all duration-300 ease-in-out" 
+          >   
         {isSubmitting ? "Loading.." : btnval}
           </button>
           {errors.root && <p className="text-red-500 text-sm p-0"> {errors.root.message}</p>}
