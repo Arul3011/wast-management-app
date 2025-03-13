@@ -103,7 +103,7 @@ const handelDeletPost =async(id)=>{
           <img
             src="/profile.png"
             alt="profile img"
-            className="w-72 h-72 rounded-full border-4 border-gray-300"
+            className="w-72 h-72 rounded-full border-4 border-gray-300 "
           />
         </div>
         <div className="w-1/2 flex flex-col items-center justify-center">
@@ -126,14 +126,14 @@ const handelDeletPost =async(id)=>{
         ) : (
           postes.map((val) => (
             <div
-              className="flex w-full max-w-4xl mx-auto border border-gray-300 rounded-lg mb-8 shadow-md"
+              className="flex w-full max-w-4xl mx-auto h-[300px] border border-gray-300 rounded-lg mb-8 shadow-md"
               key={val._id}
             >
               <div className="w-1/3">
                 <img
                   src={val.imageUrl}
                   alt="productimg"
-                  className="w-full h-full object-cover rounded-l-lg"
+                  className="w-full h-[100%] object-cover rounded-l-lg"
                 />
               </div>
               <div className="w-2/3 p-4 flex flex-col justify-between">

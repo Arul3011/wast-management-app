@@ -12,13 +12,27 @@ const Sell = () => {
   const { data: session, status } = useSession();
   const userID = "session id"
   const [downloadURL, setDownloadURL] = useState("");
-  
+  const [btnval , setBtnval] = useState("Uplode image");
   const {
     register,
     handleSubmit,
     resetField,
     formState: { errors, isSubmitting },
   } = useForm();
+// const handelimgfile = (e) =>{
+// // e.preventDefault();
+// alert("img");
+// const file = e.target.files[0];
+//     if (file) {
+//       // console.log(file);
+      
+//       setImgfile(file); // Store the selected image file in state
+//       // console.log(URL.createObjectURL(file));
+      
+//       // setImageUrl(URL.createObjectURL(file)); // Optional: Display a preview
+//     }
+// }
+
 
   const onSubmit = async (data) => {
     const file = data.file[0];
@@ -29,6 +43,7 @@ const Sell = () => {
 
         const url = await getDownloadURL(snapshot.ref);
         setDownloadURL(url);
+        setBtnval("uplode")
       } catch (error) {
         console.error("Error uploading file:", error);
       }
@@ -61,6 +76,7 @@ const Sell = () => {
             resetField("description");
             resetField("quantity");
             resetField("file");
+            setBtnval("uplode Image")
           } else {
             alert("something went wrong");
           }
@@ -102,8 +118,8 @@ return (
               },
             })}
           />
-            {errors.quantity && (
-            <p className="text-red-500 text-sm p-0"> {errors.location.message}</p>
+            {errors.type && (
+            <p className="text-red-500 text-sm p-0"> {errors.type.message}</p>
           )}
           <input
             type="text"
@@ -119,7 +135,7 @@ return (
            
           />
             {errors.quantity && (
-            <p className="text-red-500 text-sm p-0"> {errors.location.message}</p>
+            <p className="text-red-500 text-sm p-0"> {errors.quantity.message}</p>
           )}
           <input
             type="text"
@@ -133,7 +149,7 @@ return (
               },
             })}
           />
-            {errors.quantity && (
+            {errors.location && (
             <p className="text-red-500 text-sm p-0"> {errors.location.message}</p>
           )}
           <input
@@ -147,9 +163,10 @@ return (
                 message: "fill all the fields",
               },
             })}
+            // onChange={handelimgfile}
           />
-            {errors.quantity && (
-            <p className="text-red-500 text-sm p-0"> {errors.location.message}</p>
+            {errors.file && (
+            <p className="text-red-500 text-sm p-0"> {errors.file.message}</p>
           )}
           <textarea
             name="description"
@@ -162,24 +179,24 @@ return (
               },
             })}
           ></textarea>
-          {errors.quantity && (
-            <p className="text-red-500 text-sm p-0"> {errors.location.message}</p>
+          {errors.description && (
+            <p className="text-red-500 text-sm p-0"> {errors.description.message}</p>
           )}
-          <button
-            disabled={true}
+          {/* <button
+            // disabled={true}
             type="submit"
-          
+          // onClick={handelimguplode}
             className="w-1/2 mx-auto bg-white block  text-green-600 py-1 mb-[10px] rounded-full font-semibold text-sm hover:bg-green-600 hover:text-[#fff] border-[1px] border-[#fff] transition-all duration-300 ease-in-out" 
           >
         {isSubmitting ? "Loading.." : "uplodeimage"}
-          </button>
+          </button> */}
           <button
             disabled={isSubmitting}
             type="submit"
           
             className="w-1/2 mx-auto bg-white block  text-green-600 py-1 rounded-full font-semibold text-lg hover:bg-green-600 hover:text-[#fff] border-[2px] border-[#fff] transition-all duration-300 ease-in-out" 
           >
-        {isSubmitting ? "Loading.." : "submit"}
+        {isSubmitting ? "Loading.." : btnval}
           </button>
           {errors.root && <p className="text-red-500 text-sm p-0"> {errors.root.message}</p>}
         </form>
