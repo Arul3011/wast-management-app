@@ -98,7 +98,7 @@ function OtherNav() {
           {session ? (
             <>
               <Link
-                href="/profile"
+                href="/porfile"
                 className="w-full py-2 text-center bg-[#189b2c] text-white rounded-md mb-2"
               >
                 Profile
