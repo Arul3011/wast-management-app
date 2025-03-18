@@ -2,7 +2,7 @@
 import Footer from "@/componuntes/Fotter";
 import OtherNav from "@/componuntes/OtherNav";
 import React, { useContext, useEffect, useRef, useState } from "react";
-
+import toast, { Toaster } from 'react-hot-toast';
 import { CiLocationOn } from "react-icons/ci";
 import { GiWeight } from "react-icons/gi";
 import { useSession } from "next-auth/react";
@@ -14,6 +14,7 @@ function Buy() {
   const { data: session, status } = useSession();
   const [search,setSearch]=useState()
   const [searchitems,setSearchitems]=useState([])
+  const [buyloading,setBuyloading] = useState(false)
   const dialogRef = useRef(null)
   const openDialog = () => {
     dialogRef.current.showModal(); // Opens the dialog as a modal
@@ -38,7 +39,9 @@ function Buy() {
    
   }, []);
   const hangelorder = async(type,sellerEmail)=>{
-    openDialog();
+    // openDialog();
+    const loadingToast = toast.loading("Loading...")
+    setBuyloading(true);
       if(session){
 
         const fdata = await fetch('/api/sendmail',{
@@ -54,20 +57,42 @@ function Buy() {
         })
         const jres = await fdata.json()
         if(jres.resstates){
-          closeDialog();
-          alert("order query send sucessfully seller will contact you")
+          setBuyloading(false);
+          // closeDialog();
+          toast.dismiss(loadingToast)
+          toast.success("order query send sucessfully seller will contact you",{
+            duration: 8000,
+          });
+          // alert("order query send sucessfully seller will contact you")
         }else{
-          alert("something went worng try again later")
+          // closeDialog();
+          toast.dismiss(loadingToast)
+          setBuyloading(false);
+          toast.error("something went worng try again later");
+          // alert("something went worng try again later")
         }
       }else{
-       alert("log in to submit your queary")
+        // closeDialog();
+        toast.dismiss(loadingToast)
+        setBuyloading(false);
+        toast.error("log in to submit your queary");
       }
   }
 
   //  const newaee = search && items.filter((item) => item.type.toLowerCase().includes(search.toLowerCase()))
     
-   
+  //  const tostmsg = ()=>{
+    // toast.success('Successfully created!');
+    // toast.loading('Waiting...');
+    // toast.success('Here is your toast.');
+
+//     const toastId = toast.loading('Please wait...');
+//     setTimeout(() => {
+// toast.remove(toastId);
+//     }, 5000);
+//    }
   return (
+    <>
     <div className="buy-home">
     <OtherNav />
     <div className="buy-main mt-10 w-11/12 mx-auto">
@@ -108,8 +133,10 @@ function Buy() {
                   <span>{val.location}</span>
                 </p>
                 <button
+                disabled={buyloading}
                   className="bg-green-500 text-white px-8 py-3 rounded-md hover:bg-green-400 transition w-full mt-4"
                   onClick={()=>{hangelorder(val.type,val.userID)}}
+                  // onClick={tostmsg}
                  
                 >
                   BUY
@@ -129,7 +156,10 @@ function Buy() {
       <Loader />
       <p className="text-center">loading.....</p>
     </dialog>
+   
   </div>
+   <Toaster />
+  </>
   );
 }
 

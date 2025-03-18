@@ -7,6 +7,7 @@ import  {useForm }  from "react-hook-form"
 import { CgProfile } from "react-icons/cg";
 import { storage } from "@/lib/firebase";
 import { useSession } from "next-auth/react";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Sell = () => {  
   const { data: session, status } = useSession();
@@ -70,7 +71,8 @@ const Sell = () => {
         if (dbres) {
           const dbjson = await dbres.json();
           if (dbjson.messege === "added") {
-            alert("Product Added");
+            // alert("Product Added");
+            toast.success("Product Added scucessfuly" );
             resetField("location");
             resetField("type");
             resetField("description");
@@ -78,7 +80,7 @@ const Sell = () => {
             resetField("file");
             setBtnval("uplode Image")
           } else {
-            alert("something went wrong");
+            toast.error("something went wrong");
           }
         }
       } catch (error) {
@@ -110,7 +112,7 @@ return (
             type="text"
             name="type"
             placeholder="Material Type"
-            className="w-[90%] mx-auto block p-2 mb-4 text-sm text-black rounded-md"
+            className="w-[90%] mx-auto block p-2 mb-[10px] text-sm text-black rounded-md"
             {...register("type", {
               required: {
                 value: true,
@@ -119,13 +121,13 @@ return (
             })}
           />
             {errors.type && (
-            <p className="text-red-500 text-sm p-0"> {errors.type.message}</p>
+            <p className="text-red-500 text-xs pl-[20px]"> {errors.type.message}</p>
           )}
           <input
             type="text"
             name="quantity"
             placeholder="Quantity (kg)"
-            className="w-[90%] mx-auto p-2 block mb-4 text-sm text-black rounded-md"
+            className="w-[90%] mx-auto p-2 block mb-[10px] text-sm text-black rounded-md"
             {...register("quantity", {
               required: {
                 value: true,
@@ -135,13 +137,13 @@ return (
            
           />
             {errors.quantity && (
-            <p className="text-red-500 text-sm p-0"> {errors.quantity.message}</p>
+            <p className="text-red-500 text-xs pl-[20px]"> {errors.quantity.message}</p>
           )}
           <input
             type="text"
             name="location"
             placeholder="Location"
-            className="w-[90%] mx-auto block text-black p-2 mb-4 text-sm rounded-md"
+            className="w-[90%] mx-auto block text-black p-2 mb-[10px] text-sm rounded-md"
             {...register("location", {
               required: {
                 value: true,
@@ -150,13 +152,13 @@ return (
             })}
           />
             {errors.location && (
-            <p className="text-red-500 text-sm p-0"> {errors.location.message}</p>
+            <p className="text-red-500 text-xs pl-[20px]"> {errors.location.message}</p>
           )}
           <input
             type="file"
             accept="image/*"
             name="file"
-             className="w-[90%] mx-auto block text-black p-2 mb-4 bg-[#fff] placeholder:text-gray-400 text-sm rounded-md"
+             className="w-[90%] mx-auto block text-black p-2 mb-[10px] bg-[#fff] placeholder:text-gray-400 text-sm rounded-md"
             {...register("file", {
               required: {
                 value: true,
@@ -166,12 +168,12 @@ return (
             // onChange={handelimgfile}
           />
             {errors.file && (
-            <p className="text-red-500 text-sm p-0"> {errors.file.message}</p>
+            <p className="text-red-500 text-xs pl-[20px]"> {errors.file.message}</p>
           )}
           <textarea
             name="description"
             placeholder="Description"
-            className="w-[90%] mx-auto block p-2 mb-4 text-black text-sm rounded-md"
+            className="w-[90%] mx-auto block p-2 mb-[10px] text-black text-sm rounded-md"
             {...register("description", {
               required: {
                 value: true,
@@ -180,7 +182,7 @@ return (
             })}
           ></textarea>
           {errors.description && (
-            <p className="text-red-500 text-sm p-0"> {errors.description.message}</p>
+            <p className="text-red-500 text-xs pl-[20px]"> {errors.description.message}</p>
           )}
          
           <button
@@ -190,11 +192,12 @@ return (
           >   
         {isSubmitting ? "Loading.." : btnval}
           </button>
-          {errors.root && <p className="text-red-500 text-sm p-0"> {errors.root.message}</p>}
+          {errors.root && <p className="text-red-500 text-xs pl-[20px] "> {errors.root.message}</p>}
         </form>
         </div>
       </div>
     <Footer />
+      <Toaster />
     </>
   );
 };

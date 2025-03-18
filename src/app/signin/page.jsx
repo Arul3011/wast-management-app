@@ -2,7 +2,7 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
-
+import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation'
  
 
@@ -11,10 +11,11 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router= useRouter();
+  const [loading,setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(!loading);
     const result = await signIn("credentials", {
       email,
       password,
@@ -24,7 +25,9 @@ function Login() {
     if (result.error) {
       setError("Invalid email or password");
     } else {
-      alert("Success");
+      toast.success('Login scucessfull');
+      // alert("Success");
+      setLoading(!loading);
       router.push('/')
       document.cookie = `email=${email}; expires=fri, path=/`;
     }
@@ -68,8 +71,9 @@ function Login() {
    
         <input
           type="submit"
-          value="Login"
+          // value="Login"
           className="w-36 mx-auto mt-4 py-2 text-white bg-green-600 border-0 rounded-lg cursor-pointer hover:bg-green-700"
+          value = {loading ? "Loading..." : "Submit"}
         />
       </form>
     </div>
