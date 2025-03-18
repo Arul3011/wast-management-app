@@ -136,7 +136,7 @@ const Nav = () => {
         {session ? (
           <>
             <Link
-              href="/profile"
+              href="/porfile"
               className="px-4 py-2 bg-[#189b2c] text-white rounded-md"
             >
               Profile
